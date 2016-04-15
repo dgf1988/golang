@@ -2,7 +2,7 @@ package hoetom
 
 import (
 	"strconv"
-	"mahonia"
+	"github.com/dgf1988/mahonia"
 )
 
 var coding mahonia.Decoder
