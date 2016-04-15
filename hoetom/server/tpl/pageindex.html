@@ -1,0 +1,17 @@
+
+<style type="text/css" rel="stylesheet">
+    .indexpage a {
+        width: 20px;
+        display: inline-block;
+        padding-bottom: 10px;
+    }
+</style>
+<div class="indexpage">
+    {{range .Steps}}
+        {{if .IsNow}}
+        <a href="/player/page/{{.Number}}" title="第{{.Number}}页" style="font-size: 22px;" >{{.Number}}</a>
+        {{else}}
+        <a href="/player/page/{{.Number}}" title="第{{.Number}}页" >{{.Number}}</a>
+        {{end}}
+    {{end}}
+</div>

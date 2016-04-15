@@ -1,0 +1,105 @@
+
+
+<style type="text/css" rel="stylesheet">
+    #weiqi{
+        margin: 10px auto;
+        font-family: "Microsoft YaHei";
+    }
+
+    /* 棋谱样式  */
+    #weiqi-header{
+
+    }
+    #weiqi-header ul{
+        width:64%;
+        margin: 10px auto;
+        list-style: none;
+    }
+    #weiqi-content {
+        margin: auto;
+        width: 546px;
+        height: 546px;
+        background: url("/img/muwen.png") repeat center ;
+    }
+    #weiqi-content .dot{
+        position: absolute;
+        background-color: black;
+        border-radius: 3px;
+        width: 5px;
+        height: 5px;
+    }
+    #weiqi-content table{
+        position: absolute;
+        border-collapse: collapse;
+    }
+    #weiqi-content table td{
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        border: 1px solid #9d9d9d;
+        background-position:  center;
+        background-repeat: no-repeat;
+    }
+    #weiqi-content #display td,
+    #weiqi-content #handler td,
+    #weiqi-content #top_x td,
+    #weiqi-content #bottom_x td,
+    #weiqi-content #left_y td,
+    #weiqi-content #right_y td{
+        border-color: transparent;
+    }
+    #weiqi-content #handler{
+        z-index: 100;
+    }
+    #weiqi-content #display{
+        font-size: 10px;
+        z-index: 1;
+    }
+
+    #weiqi-footer{
+        margin-top: 20px;
+        text-align: center;
+    }
+    #weiqi-footer p #stepnumber{
+        width: 40px;
+    }
+</style>
+<div id="weiqi">
+    <div id="weiqi-header"></div>
+    <div id="weiqi-content"></div>
+    <input type="hidden" id="sgfstring" value="{{.}}"/>
+
+    <div id="weiqi-footer">
+        <p>
+            <button onclick="weiqi_mode(this)">试下</button>
+            <button onclick="weiqi_forward()">前进</button>
+            <button onclick="weiqi_back()">后退</button>
+            <button onclick="weiqi_goto()">跳转</button>
+            第<input id="stepnumber" type="number" onkeydown="weiqi_checkKeyDown(event)" onkeyup="weiqi_checkKeyUp()"/>手
+            <input id="setshow" name="Fruit" type="checkbox" value="" onchange="weiqi_numbershow(this)" />显示手数
+        </p>
+    </div>
+</div>
+<script src="/js/weiqi.js"></script>
+<script src="/js/weiqi-event.js"></script>
+<script>
+
+    var sgf = sgf_create(document.getElementById('sgfstring').value);
+    //  棋盘脚本。
+
+    for(var i = 0 ; i< sgf.steps.length ; i++){
+        weiqi_step(sgf.steps[i].point,sgf.steps[i].player);
+    }
+    weiqi_goto();
+    //初始化棋盘事件。
+    handlermap.onmousedown = function(event){
+        if( event.button != 2 ){
+            weiqi_forward();
+        }
+        return false;
+    };
+    handlermap.oncontextmenu = function(event){
+        weiqi_back();
+        return false;
+    };
+</script>

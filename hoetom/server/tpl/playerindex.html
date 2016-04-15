@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Hoetom</title>
+</head>
+<body>
+<h1>Hoetom</h1>
+<div>
+    <header>
+        <title>Players</title>
+    </header>
+    <table>
+        <tr>
+            <th>hoetomid</th>
+            <th>name</th>
+            <th>sex</th>
+            <th>rank</th>
+            <th>nat</th>
+            <th>cat</th>
+            <th>birth</th>
+            <th>update</th>
+        </tr>
+        {{range .}}
+        <tr>
+            {{range .}}
+            <td>{{.}}</td>
+            {{end}}
+        </tr>
+        {{end}}
+    </table>
+</div>
+
+</body>
+</html>
